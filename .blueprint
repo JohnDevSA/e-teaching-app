@@ -1,0 +1,35 @@
+created:
+    - database/factories/LessonFactory.php
+    - database/factories/SubjectFactory.php
+    - database/factories/TopicFactory.php
+    - database/factories/CourseFactory.php
+    - database/factories/StudentLessonFactory.php
+    - database/factories/LessonMediaFactory.php
+    - database/factories/LessonCommentFactory.php
+    - database/factories/UserTypeFactory.php
+    - database/migrations/2024_11_11_205251_create_lessons_table.php
+    - database/migrations/2024_11_11_205252_create_subjects_table.php
+    - database/migrations/2024_11_11_205253_create_topics_table.php
+    - database/migrations/2024_11_11_205254_create_courses_table.php
+    - database/migrations/2024_11_11_205255_create_student_lessons_table.php
+    - database/migrations/2024_11_11_205256_create_lesson_media_table.php
+    - database/migrations/2024_11_11_205257_create_lesson_comments_table.php
+    - database/migrations/2024_11_11_205258_create_user_types_table.php
+    - app/Models/Lesson.php
+    - app/Models/Subject.php
+    - app/Models/Topic.php
+    - app/Models/Course.php
+    - app/Models/StudentLesson.php
+    - app/Models/LessonMedia.php
+    - app/Models/LessonComment.php
+    - app/Models/UserType.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, remember_token: 'string:100 nullable default:NULL' }
+    Lesson: { name: string, description: string, start_date: datetime, end_date: datetime, status: string, region: string, link: string, subject_id: unasignedInteger, topic_id: unasignedInteger, relationships: { belongsTo: 'User, Subject, Topic', hasMany: 'StudentLesson,LessonMedia' } }
+    Subject: { name: string, description: string, start_date: datetime, end_date: datetime, course_id: unasignedInteger, relationships: { hasMany: 'Lesson, Topic', belongsTo: Course } }
+    Topic: { name: string, subject_id: unasignedInteger, relationships: { belongsTo: Subject } }
+    Course: { name: string, description: string, start_date: datetime, end_date: datetime, relationships: { hasMany: Subject } }
+    StudentLesson: { user_id: unasignedInteger, lesson_id: unasignedInteger, relationships: { belongsTo: 'User,Lesson' } }
+    LessonMedia: { lesson_id: unasignedInteger, file_type_id: unasignedInteger, file_path: string, file_size: string, uploaded_by: unasignedInteger }
+    LessonComment: { lesson_id: unasignedInteger, user_id: unasignedInteger, comment_text: string, relationships: { belongsTo: 'User,Lesson' } }
+    UserType: { name: string, description: string, relationships: { hasMany: User } }

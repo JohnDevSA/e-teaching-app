@@ -1,0 +1,66 @@
+models:
+  Lesson:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    status: string
+    region: string
+    link: string
+    subject_id: unasignedInteger
+    topic_id: unasignedInteger
+    relationships:
+      belongsTo: User, Subject, Topic
+      hasMany: StudentLesson,LessonMedia
+  Subject:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    course_id: unasignedInteger
+    relationships:
+      hasMany: Lesson, Topic
+      belongsTo: Course
+  Topic:
+    name: string
+    subject_id: unasignedInteger
+    relationships:
+       belongsTo: Subject
+  Course:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    relationships:
+      hasMany: Subject
+
+#  user_id = student_id
+  StudentLesson:
+    user_id: unasignedInteger
+    lesson_id: unasignedInteger
+    relationships:
+      belongsTo: User,Lesson
+
+  LessonMedia:
+    lesson_id: unasignedInteger
+    file_type_id: unasignedInteger
+    file_path: string
+    file_size: string
+    uploaded_by: unasignedInteger
+
+  LessonComment:
+    lesson_id: unasignedInteger
+    user_id: unasignedInteger
+    comment_text: string
+    relationships:
+      belongsTo: User,Lesson
+
+  UserType:
+    name: string
+    description: string
+    relationships:
+      hasMany: User
+
+
+controllers:
+  # ...
