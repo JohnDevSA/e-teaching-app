@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Course;
+use App\Models\Grade;
 
 class CourseFactory extends Factory
 {
@@ -13,7 +13,7 @@ class CourseFactory extends Factory
      *
      * @var string
      */
-    protected $model = Course::class;
+    protected $model = Grade::class;
 
     /**
      * Define the model's default state.

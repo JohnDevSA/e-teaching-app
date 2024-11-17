@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('lesson_media', function (Blueprint $table) {
+        Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->string('lesson_id');
-            $table->string('file_type_id');
-            $table->string('file_path');
-            $table->string('file_size');
-            $table->string('uploaded_by');
+            $table->string('name');
+            $table->string('description');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            $table->foreignId('grade_id');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('lesson_media');
+        Schema::dropIfExists('subjects');
     }
 };

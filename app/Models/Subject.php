@@ -21,7 +21,7 @@ class Subject extends Model
         'description',
         'start_date',
         'end_date',
-        'course_id',
+        'grade_id',
     ];
 
     /**
@@ -33,7 +33,7 @@ class Subject extends Model
         'id' => 'integer',
         'start_date' => 'datetime',
         'end_date' => 'datetime',
-        'course_id' => 'integer',
+        'grade_id' => 'integer',
     ];
 
     public function lessons(): HasMany
@@ -46,8 +46,8 @@ class Subject extends Model
         return $this->hasMany(Topic::class);
     }
 
-    public function course(): BelongsTo
+    public function grade(): BelongsTo
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Grade::class);
     }
 }

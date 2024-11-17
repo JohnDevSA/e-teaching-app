@@ -17,7 +17,7 @@ class LessonResource extends Resource
 {
     protected static ?string $model = Lesson::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-book-open';
 
     public static function form(Form $form): Form
     {
@@ -27,6 +27,19 @@ class LessonResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
+                Forms\Components\Select::make('grade_id')
+                    ->relationship('grade', 'name')
+                    ->required(),
+
+                Forms\Components\Select::make('subject_id')
+                    ->relationship('subject', 'name')
+                    ->required(),
+
+                Forms\Components\Select::make('topic_id')
+                    ->relationship('topic', 'name')
+//                    ->searchable()
+                    ->label('Topic')
+                    ->required(),
                  Forms\Components\TextArea::make('description')
                     ->required()
                     ->maxLength(255)
@@ -37,18 +50,15 @@ class LessonResource extends Resource
                     ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
                     ->required(),
-//                Forms\Components\TextInput::make('status')
-//                    ->required()
+                Forms\Components\TextInput::make('link')
+                    ->prefix('https://')
+                    ->required(),
 //                    ->maxLength(255),
 //                Forms\Components\TextInput::make('region')
 //                    ->required()
 //                    ->maxLength(255),
-//                Forms\Components\TextInput::make('topic_id')
-//                    ->required()
-//                    ->maxLength(255),
-                Forms\Components\Select::make('subject_id')
-                    ->relationship('subject', 'name')
-                    ->required(),
+
+
 //                Forms\Components\Select::make('user_id')
 //                    ->relationship('user', 'name')
 //                    ->required(),
@@ -62,10 +72,11 @@ class LessonResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('description')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('start_date')
-                    ->dateTime()
-                    ->sortable(),
+                    ->searchable()
+                    ->wrap(),
+//                Tables\Columns\TextColumn::make('start_date')
+//                    ->dateTime()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('end_date')
                     ->dateTime()
                     ->sortable(),
@@ -78,9 +89,9 @@ class LessonResource extends Resource
                 Tables\Columns\TextColumn::make('subject.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('user.name')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -95,6 +106,8 @@ class LessonResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\SelectAction::make('share'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

@@ -4,35 +4,34 @@ models:
     description: string
     start_date: datetime
     end_date: datetime
-    status: string
-    region: string
     link: string
     subject_id: unasignedInteger
     topic_id: unasignedInteger
+    grade_id: unasignedInteger
     relationships:
-      belongsTo: User, Subject, Topic
+      belongsTo: User, Subject, Topic, Grade
       hasMany: StudentLesson,LessonMedia
   Subject:
     name: string
     description: string
     start_date: datetime
     end_date: datetime
-    course_id: unasignedInteger
+    grade_id: unasignedInteger
     relationships:
       hasMany: Lesson, Topic
-      belongsTo: Course
+      belongsTo: Grade
   Topic:
     name: string
     subject_id: unasignedInteger
     relationships:
        belongsTo: Subject
-  Course:
+  Grade:
     name: string
     description: string
     start_date: datetime
     end_date: datetime
     relationships:
-      hasMany: Subject
+      hasMany: Subject,lesson
 
 #  user_id = student_id
   StudentLesson:
@@ -47,6 +46,12 @@ models:
     file_path: string
     file_size: string
     uploaded_by: unasignedInteger
+    relationships:
+      belongsTo: User,FileType
+
+  FileType:
+    name: string,
+    description: string
 
   LessonComment:
     lesson_id: unasignedInteger
@@ -60,7 +65,6 @@ models:
     description: string
     relationships:
       hasMany: User
-
 
 controllers:
   # ...

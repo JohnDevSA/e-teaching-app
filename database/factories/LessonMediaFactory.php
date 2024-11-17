@@ -4,7 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\FileType;
 use App\Models\LessonMedia;
+use App\Models\User;
 
 class LessonMediaFactory extends Factory
 {
@@ -22,10 +24,11 @@ class LessonMediaFactory extends Factory
     {
         return [
             'lesson_id' => $this->faker->word(),
-            'file_type_id' => $this->faker->word(),
+            'file_type_id' => FileType::factory(),
             'file_path' => $this->faker->word(),
             'file_size' => $this->faker->word(),
             'uploaded_by' => $this->faker->word(),
+            'user_id' => User::factory(),
         ];
     }
 }

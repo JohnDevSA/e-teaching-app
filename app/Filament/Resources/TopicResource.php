@@ -17,18 +17,21 @@ class TopicResource extends Resource
 {
     protected static ?string $model = Topic::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-document-magnifying-glass';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
                 Forms\Components\Select::make('subject_id')
                     ->relationship('subject', 'name')
+                    ->columnSpanFull()
                     ->required(),
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->columnSpanFull()
+                    ->maxLength(255),
+
             ]);
     }
 

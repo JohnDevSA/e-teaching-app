@@ -4,18 +4,16 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\;
-use App\Models\Lesson;
-use App\Models\User;
+use App\Models\FileType;
 
-class LessonFactory extends Factory
+class FileTypeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Lesson::class;
+    protected $model = FileType::class;
 
     /**
      * Define the model's default state.
@@ -25,12 +23,6 @@ class LessonFactory extends Factory
         return [
             'name' => $this->faker->name(),
             'description' => $this->faker->text(),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
-            'link' => $this->faker->word(),
-            'subject_id' => ::factory(),
-            'topic_id' => ::factory(),
-            'user_id' => User::factory(),
         ];
     }
 }

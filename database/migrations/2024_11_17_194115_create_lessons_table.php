@@ -17,12 +17,11 @@ return new class extends Migration
             $table->string('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            $table->string('status');
-            $table->string('region');
             $table->string('link');
             $table->foreignId('subject_id');
             $table->foreignId('topic_id');
             $table->foreignId('user_id');
+            $table->foreignId('grade_id');
             $table->timestamps();
         });
     }

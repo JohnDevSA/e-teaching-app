@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\Course;
+use App\Models\Grade;
 use App\Models\Subject;
 
 class SubjectFactory extends Factory
@@ -26,7 +26,7 @@ class SubjectFactory extends Factory
             'description' => $this->faker->text(),
             'start_date' => $this->faker->dateTime(),
             'end_date' => $this->faker->dateTime(),
-            'course_id' => Course::factory(),
+            'grade_id' => Grade::factory(),
         ];
     }
 }

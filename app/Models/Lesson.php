@@ -21,8 +21,6 @@ class Lesson extends Model
         'description',
         'start_date',
         'end_date',
-        'status',
-        'region',
         'link',
         'subject_id',
         'topic_id',
@@ -51,6 +49,11 @@ class Lesson extends Model
     public function subject(): BelongsTo
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function grade(): BelongsTo
+    {
+        return $this->belongsTo(Grade::class);
     }
 
     public function topic(): BelongsTo
